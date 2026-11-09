@@ -1,0 +1,49 @@
+mappings:
+# Network interfaces as label
+- labels:
+    device: ${3}
+    hostname: ${1}
+  match: scale\.(.*)\.net(_.*)?\.(\w+)\.(\w+)
+  match_type: regex
+  name: truenas_net${2}_${4}
+# Cpu core as label
+- labels:
+    cpu: ${4}
+    hostname: ${1}
+  match: scale\.(.*)\.(\w+)\.(\w+)\.(cpu\d?)
+  match_type: regex
+  name: truenas_${2}_${3}
+# All cores
+- labels:
+    cpu: all
+    hostname: ${1}
+  match: scale\.(.*)\.(\w+)\.(\w+)\.cpu
+  match_type: regex
+  name: truenas_${2}_${3}
+# Service as label
+- labels:
+    hostname: ${1}
+    service: ${3}
+  match: scale\.(.*)\.services\.(\w+)\.(.*)
+  match_type: regex
+  name: truenas_services_${2}
+# Disk as label
+- labels:
+    disk: ${4}
+    hostname: ${1}
+  match: scale\.(.*)\.truenas_disk_(\w*)\.(\w*\.)?(.*)\.(\w*)
+  match_type: regex
+  name: truenas_disk_${2}_${5}
+# Cgroup as label
+- labels:
+    cgroup: ${2}
+    hostname: ${1}
+  match: scale\.(.*)\.cgroup_(\w+)\.(\w+)\.(\w+)
+  match_type: regex
+  name: truenas_cgroup_${3}_${4}
+# Other metrics
+- labels:
+    hostname: ${1}
+  match: scale\.(.*)\.(\w*)\.(\w*)\.(\w*)
+  match_type: regex
+  name: truenas_${2}_${3}_${4}
